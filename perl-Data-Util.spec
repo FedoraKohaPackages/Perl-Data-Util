@@ -25,7 +25,7 @@ functions for subroutines and symbol table hashes (stashes).
 
 %prep
 %setup -q -n Data-Util-%{version}
-%patch -p1
+%patch0 -p1
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor OPTIMIZE="$RPM_OPT_FLAGS"
 make %{?_smp_mflags}
