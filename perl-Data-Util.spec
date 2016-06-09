@@ -6,7 +6,6 @@ License:        GPL+ or Artistic
 Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Data-Util/
 Source0:        http://www.cpan.org/authors/id/G/GF/GFUJI/Data-Util-%{version}.tar.gz
-Patch0:         fix.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  perl >= 1:5.8.1
 BuildRequires:  perl(Devel::PPPort) >= 3.19
@@ -25,7 +24,7 @@ functions for subroutines and symbol table hashes (stashes).
 
 %prep
 %setup -q -n Data-Util-%{version}
-%patch0 -p1
+
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor OPTIMIZE="$RPM_OPT_FLAGS"
 make %{?_smp_mflags}
