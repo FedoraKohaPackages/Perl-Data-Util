@@ -1,0 +1,40 @@
+diff -rup Data-Util-0.63-eMJzy2-orig/DataUtil.xs Data-Util-0.63-eMJzy2/DataUtil.xs
+--- Data-Util-0.63-eMJzy2-orig/DataUtil.xs	2013-04-03 00:06:08.000000000 -0700
++++ Data-Util-0.63-eMJzy2/DataUtil.xs	2014-09-23 18:48:48.000000000 -0700
+@@ -674,7 +674,14 @@ my_uninstall_sub(pTHX_ HV* const stash, 
+ 		CV* code;
+ 
+ 		if(!isGV(gv)){ /* a subroutine stub or special constant*/
+-			if(SvROK((SV*)gv) && ckWARN(WARN_MISC)){
++			       /* or perhaps a sub ref */
++			if(SvROK((SV*)gv)) {
++			    if(SvTYPE(SvRV(gv)) == SVt_PVCV) {
++				if( specified_code &&
++				    specified_code != (CV*)SvRV(gv) )
++					return;
++			    }
++			    else if(ckWARN(WARN_MISC))
+ 				Perl_warner(aTHX_ packWARN(WARN_MISC), "Constant subroutine %s uninstalled", name);
+ 			}
+ 			(void)hv_delete(stash, name, namelen, G_DISCARD);
+diff -rup Data-Util-0.63-eMJzy2-orig/lib/Data/Util/PurePerl.pm Data-Util-0.63-eMJzy2/lib/Data/Util/PurePerl.pm
+--- Data-Util-0.63-eMJzy2-orig/lib/Data/Util/PurePerl.pm	2012-10-20 04:54:44.000000000 -0700
++++ Data-Util-0.63-eMJzy2/lib/Data/Util/PurePerl.pm	2014-09-23 18:44:36.000000000 -0700
+@@ -246,8 +246,16 @@ sub uninstall_subroutine {
+ 		my $glob = $stash->{$name};
+ 
+ 		if(ref(\$glob) ne 'GLOB'){
+-			if(ref $glob){
++			if(ref $glob) {
++			    if(Scalar::Util::reftype $glob eq 'CODE'){
++				if(defined $specified_code &&
++				   $specified_code != $glob) {
++					next;
++				}
++			    }
++			    else {
+ 				warnings::warnif(misc => "Constant subroutine $name uninstalled");
++			    }
+ 			}
+ 			delete $stash->{$name};
+ 			next;
