@@ -18,6 +18,7 @@ BuildRequires:  perl(Test::More) >= 0.62
 BuildRequires:  perl(XSLoader) >= 0.02
 Requires:       perl(XSLoader) >= 0.02
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+Provides:       perl(Data::Util::PurePerl)
 
 %description
 This module provides utility functions for data and data types, including
