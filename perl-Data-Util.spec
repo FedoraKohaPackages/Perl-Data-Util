@@ -1,6 +1,6 @@
 Name:           perl-Data-Util
 Version:        0.63
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Selection of utilities for data and data types
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -18,7 +18,7 @@ BuildRequires:  perl(Test::More) >= 0.62
 BuildRequires:  perl(XSLoader) >= 0.02
 Requires:       perl(XSLoader) >= 0.02
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
-Provides:       perl(Data::Util::PurePerl)
+Provides:       perl(Data::Util/PurePerl)
 
 %description
 This module provides utility functions for data and data types, including
@@ -56,6 +56,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Thu Jun 16 2016 Nicholas van Oudtshoorn <vanoudt@gmail.com> 0.63-2
+- Change provides
 * Thu Jun 16 2016 Nicholas van Oudtshoorn <vanoudt@gmail.com> 0.63-2
 - new package built with tito
 - Include Provides Data::Util::PurePerl
