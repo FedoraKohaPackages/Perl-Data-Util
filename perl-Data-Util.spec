@@ -8,6 +8,7 @@ URL:            http://search.cpan.org/dist/Data-Util/
 Source0:        http://www.cpan.org/authors/id/G/GF/GFUJI/Data-Util-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  perl >= 1:5.8.1
+BuildRequires:  perl-Module-Install-XSUtil
 BuildRequires:  perl(Devel::PPPort) >= 3.19
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Hash::Util::FieldHash::Compat)
