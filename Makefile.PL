@@ -12,7 +12,7 @@ test_requires 'Test::Exception' => 0.27;
 test_requires 'Scope::Guard';
 test_requires 'Hash::Util::FieldHash::Compat';
 
-author_tests 'xt', 'author/t';
+#author_tests 'xt', 'author/t';
 
 if(want_xs()){
     use_xshelper;
