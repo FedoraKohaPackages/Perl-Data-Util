@@ -23,8 +23,6 @@ else{
     requires 'Hash::Util::FieldHash::Compat';
 }
 
-auto_set_repository;
-
 clean_files  q{
     Data-Util-*
     *.stackdump
